@@ -1,8 +1,8 @@
 module.exports = {
-  getAllPlans: (req, res) => {
-    res.send('get all plans');
+  getAllBudgets: (req, res) => {
+    res.send('get all budgets');
   },
-  createPlan: (req, res) => {
-    res.send('post new plans');
+  createBudget: (req, res) => {
+    res.send('post new budget');
   }
 };

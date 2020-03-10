@@ -12,7 +12,7 @@ const port = 3000;
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-app.use('/api', router);
+app.use('/api/budget', router);
 
 app.listen(port, () =>
   console.log(`Budget-Hackathon listening on port ${port}!`)
