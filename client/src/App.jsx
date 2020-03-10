@@ -1,7 +1,7 @@
-import React from 'react';
-import BudgetList from './components/BudgetList.jsx';
-import axios from 'axios';
-import { errorHanlder } from '../../utils';
+import React from "react";
+import BudgetList from "./components/BudgetList.jsx";
+import axios from "axios";
+import { errorHanlder } from "../../utils";
 
 class App extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class App extends React.Component {
 
   fetchAllBudgets() {
     return axios
-      .get('/api/budget')
+      .get("/api/budget")
       .then(data => {
         if (data.status !== 200) throw data;
         else this.setState({ budgets: data.data });
@@ -32,7 +32,7 @@ class App extends React.Component {
 
   handleBudgetCreate(budget) {
     return axios
-      .post('/api/budget', budget)
+      .post("/api/budget", budget)
       .then(data => {
         if (data.status !== 201) throw data;
         else this.fetchAllBudgets();
@@ -64,6 +64,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Budget App</h1>
+
         <BudgetList budgets={this.state.budgets} />
       </div>
     );
