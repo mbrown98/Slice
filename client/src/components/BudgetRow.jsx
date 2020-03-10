@@ -33,45 +33,57 @@ class BudgetRow extends React.Component {
     return (
       <div>
         <button onClick={this.handleClick}></button>
-        {this.state.clicked === true ? (
+        <div>
           <div>
-            <label>
-              Edit Name{"  "}
-              <input
-                type="text"
-                name="name"
-                value={this.state.name}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>
-              Budget{"  "}
-              <input
-                type="text"
-                name="budget"
-                value={this.state.budget}
-                onChange={this.handleChange}
-              />
-            </label>
-
-            <label>
-              Description{"  "}
-              <input
-                type="text"
-                name="description"
-                value={this.state.description}
-                onChange={this.handleChange}
-              />
-            </label>
+            <h3>
+              Name:{" "}
+              {this.state.clicked ? (
+                <input
+                  type="text"
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                />
+              ) : (
+                this.state.name
+              )}
+            </h3>
           </div>
-        ) : (
-          <h1 className="name">{this.state.name}</h1>
-        )}
 
-        <h2 className="budget">Budget: {this.state.budget}</h2>
-        <h4 className="description">Description: {this.state.description}</h4>
-        <div className="transacations">
-          {" "}
+          <div>
+            <h3>
+              Budget:{" "}
+              {this.state.clicked ? (
+                <input
+                  type="text"
+                  name="budget"
+                  value={this.state.budget}
+                  onChange={this.handleChange}
+                />
+              ) : (
+                this.state.budget
+              )}
+            </h3>
+          </div>
+
+          <div>
+            <h3>
+              Budget:{" "}
+              {this.state.clicked ? (
+                <input
+                  type="text"
+                  name="description"
+                  value={this.state.description}
+                  onChange={this.handleChange}
+                />
+              ) : (
+                this.state.description
+              )}
+            </h3>
+          </div>
+        </div>
+
+        <div>
           <h4>Transactions</h4>
           {this.props.transactions.map(trans => {
             return (
