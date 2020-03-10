@@ -3,7 +3,7 @@ const controller = require('./controllers');
 
 router.get('/', controller.getAllBudgets);
 router.post('/', controller.createBudget);
-router.delete('/', controller.deleteBudget);
-router.put('/', controller.updateBudget);
+router.delete('/:id', controller.deleteBudget);
+router.put('/:id', controller.updateBudget);
 
 module.exports = router;
