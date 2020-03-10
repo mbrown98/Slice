@@ -13,6 +13,7 @@ class BudgetList extends React.Component {
         {this.props.budgets.map(budget => {
           return (
             <BudgetRow
+              key={budget.name}
               name={budget.name}
               budget={budget.budget}
               description={budget.description}
