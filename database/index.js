@@ -1,22 +1,20 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 
-mongoose.connect("mongodb://localhost/budget");
+mongoose.connect('mongodb://localhost/budget');
 
-var budgetSchema = new mongoose.Schema({
-  name: String,
-  description: String,
-  budget: Number,
-  transactions: [
-    { date: String, description: String, amount: Number, category: String }
-  ]
-});
+const budgetSchema = new mongoose.Schema(
+  {
+    name: String,
+    description: String,
+    budget: Number,
+    transactions: [
+      { date: String, description: String, amount: Number, category: String }
+    ]
+  },
+  { timestamps: true }
+);
 
-var Budget = mongoose.model("Budget", budgetSchema);
+const Budget = mongoose.model('Budget', budgetSchema);
 
-const retrieveAll = () => {
-  return Budget.find({})
-    .limit(10)
-    .exec();
-};
-
-module.exports.retrieveAll = retrieveAll;
+module.exports = Budget;
