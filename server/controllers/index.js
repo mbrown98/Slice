@@ -1,12 +1,5 @@
 const Budget = require('../../database');
-
-const errHandler = (res, err) => {
-  // .catch((err) => errHandler(res, err))
-  // ===
-  // .catch(errHandler.bind(null, res));
-  console.warn(`Error: ${err}`);
-  res.sendStatus(500);
-};
+const { serverErrorHandler } = require('../../utils');
 
 module.exports = {
   getAllBudgets: (req, res) => {
@@ -15,7 +8,7 @@ module.exports = {
       .then(data => {
         res.json(data);
       })
-      .catch(errHandler.bind(null, res));
+      .catch(serverErrorHandler.bind(null, res));
   },
   createBudget: (req, res) => {
     Budget.create(req.body)
@@ -23,7 +16,7 @@ module.exports = {
         if (!data) throw data;
         else res.status(201).json(data);
       })
-      .catch(errHandler.bind(null, res));
+      .catch(serverErrorHandler.bind(null, res));
   },
   updateBudget: (req, res) => {
     const { id } = req.params;
@@ -33,7 +26,7 @@ module.exports = {
         if (!data) throw data;
         else res.json(updatedBudget);
       })
-      .catch(errHandler.bind(null, res));
+      .catch(serverErrorHandler.bind(null, res));
   },
   deleteBudget: (req, res) => {
     const { id } = req.params;
@@ -42,6 +35,6 @@ module.exports = {
         if (!data) throw data;
         else res.json(req.body);
       })
-      .catch(errHandler.bind(null, res));
+      .catch(serverErrorHandler.bind(null, res));
   }
 };
