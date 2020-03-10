@@ -28,14 +28,20 @@ module.exports = {
   updateBudget: (req, res) => {
     const { id } = req.params;
     const updatedBudget = req.body;
-    Budget.findOneAndUpdate({ _id: budget_id }, updatedBudget)
+    Budget.findOneAndUpdate({ _id: id }, updatedBudget)
       .then(data => {
         if (!data) throw data;
-        else res.status(204).json(updatedBudget);
+        else res.json(updatedBudget);
       })
       .catch(errHandler.bind(null, res));
   },
   deleteBudget: (req, res) => {
-    const { budget_id } = req.params;
+    const { id } = req.params;
+    Budget.findOneAndRemove({ _id: id })
+      .then(data => {
+        if (!data) throw data;
+        else res.json(req.body);
+      })
+      .catch(errHandler.bind(null, res));
   }
 };
