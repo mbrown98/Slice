@@ -25,6 +25,17 @@ module.exports = {
       })
       .catch(errHandler.bind(null, res));
   },
-  updateBudget: (req, res) => {},
-  deleteBudget: (req, res) => {}
+  updateBudget: (req, res) => {
+    const { id } = req.params;
+    const updatedBudget = req.body;
+    Budget.findOneAndUpdate({ _id: budget_id }, updatedBudget)
+      .then(data => {
+        if (!data) throw data;
+        else res.status(204).json(updatedBudget);
+      })
+      .catch(errHandler.bind(null, res));
+  },
+  deleteBudget: (req, res) => {
+    const { budget_id } = req.params;
+  }
 };
