@@ -1,5 +1,13 @@
 const Budget = require('../../database');
 
+const errHandler = (res, err) => {
+  // .catch((err) => errHandler(res, err))
+  // ===
+  // .catch(errHandler.bind(null, res));
+  console.warn(`Error: ${err}`);
+  res.sendStatus(500);
+};
+
 module.exports = {
   getAllBudgets: (req, res) => {
     Budget.find()
@@ -7,12 +15,13 @@ module.exports = {
       .then(data => {
         res.json(data);
       })
-      .catch(err => {
-        console.log(`err when get all budgets... ${err}`);
-        res.sendStatus(500);
-      });
+      .catch(errHandler.bind(null, res));
   },
   createBudget: (req, res) => {
-    res.send('post new budget');
-  }
+    Budget.create(req.body)
+      .then()
+      .catch(errHandler.bind(null, res));
+  },
+  updateBudget: (req, res) => {},
+  deleteBudget: (req, res) => {}
 };
