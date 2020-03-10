@@ -19,7 +19,10 @@ module.exports = {
   },
   createBudget: (req, res) => {
     Budget.create(req.body)
-      .then()
+      .then(data => {
+        if (!data) throw data;
+        else res.status(201).json(data);
+      })
       .catch(errHandler.bind(null, res));
   },
   updateBudget: (req, res) => {},
