@@ -13,42 +13,59 @@ class BudgetRow extends React.Component {
       clicked: false
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
   }
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
+  handleClick() {
+    this.setState({ clicked: !this.state.clicked });
+  }
 
-  handleSubmit(event) {
-    this.setState({ [event.target.name]: event.target.value });
+  handleNameChange(event) {
+    this.setState({ name: this.state.typedName });
     this.setState({ clicked: !this.state.clicked });
   }
 
   render() {
     return (
-      <div className="budgetListPart">
-        <h1
-          className="name"
-          onClick={() => {
-            this.setState({ clicked: !this.state.clicked });
-          }}
-        >
-          {this.state.name}
-        </h1>
-        {this.state.clicked && (
-          <form onSubmit={this.handleSubmit}>
+      <div>
+        <button onClick={this.handleClick}></button>
+        {this.state.clicked === true ? (
+          <div>
             <label>
               Edit Name{"  "}
               <input
                 type="text"
                 name="name"
-                value={this.state.value}
+                value={this.state.name}
                 onChange={this.handleChange}
               />
             </label>
-            <input type="submit" value="Submit" />
-          </form>
+            <label>
+              Budget{"  "}
+              <input
+                type="text"
+                name="budget"
+                value={this.state.budget}
+                onChange={this.handleChange}
+              />
+            </label>
+
+            <label>
+              Description{"  "}
+              <input
+                type="text"
+                name="description"
+                value={this.state.description}
+                onChange={this.handleChange}
+              />
+            </label>
+          </div>
+        ) : (
+          <h1 className="name">{this.state.name}</h1>
         )}
 
         <h2 className="budget">Budget: {this.state.budget}</h2>
