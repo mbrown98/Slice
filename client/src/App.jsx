@@ -12,6 +12,8 @@ class App extends React.Component {
     };
 
     this.handleBudgetCreate = this.handleBudgetCreate.bind(this);
+    this.handleDeleteBudget = this.handleDeleteBudget.bind(this);
+    this.handleUpdateBudget = this.handleUpdateBudget.bind(this);
   }
 
   componentDidMount() {
@@ -45,7 +47,6 @@ class App extends React.Component {
     return axios
       .delete(`/api/budget/${budget._id}`)
       .then(data => {
-        console.log(`${budget.name} deleted...`);
         this.fetchAllBudgets();
       })
       .catch(errorHanlder);
@@ -53,9 +54,8 @@ class App extends React.Component {
 
   handleUpdateBudget(budget) {
     return axios
-      .put(`/api/budget/${budget._id}`, { data: budget })
+      .put(`/api/budget/${budget._id}`, budget)
       .then(data => {
-        console.log(`${budget.name} deleted...`);
         this.fetchAllBudgets();
       })
       .catch(errorHanlder);
@@ -67,7 +67,11 @@ class App extends React.Component {
         <h1>Budget App</h1>
         <CreateBudget />
 
-        <BudgetList budgets={this.state.budgets} />
+        <BudgetList
+          budgets={this.state.budgets}
+          handleUpdate={this.handleUpdateBudget}
+          handleDelete={this.handleDeleteBudget}
+        />
       </div>
     );
   }
