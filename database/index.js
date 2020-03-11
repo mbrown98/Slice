@@ -13,7 +13,12 @@ const budgetSchema = new mongoose.Schema(
     description: String,
     budget: Number,
     transactions: [
-      { date: String, description: String, amount: Number, category: String }
+      {
+        isPurchased: { type: Boolean, default: false },
+        description: String,
+        amount: Number,
+        category: { type: String, default: 'General' }
+      }
     ]
   },
   { timestamps: true }
