@@ -63,10 +63,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Budget App</h1>
+      <div className="container">
         <CreateBudget />
-
         <BudgetList
           budgets={this.state.budgets}
           handleUpdate={this.handleUpdateBudget}
