@@ -5,5 +5,6 @@ router.get('/', controller.getAllBudgets);
 router.post('/', controller.createBudget);
 router.delete('/:id', controller.deleteBudget);
 router.put('/:id', controller.updateBudget);
+router.get('/category', controller.getAllCategories);
 
 module.exports = router;
