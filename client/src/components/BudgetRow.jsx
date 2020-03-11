@@ -12,6 +12,7 @@ class BudgetRow extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.allocateMoney = this.allocateMoney.bind(this);
+    this.addNewTransaction = this.addNewTransaction.bind(this);
   }
 
   handleChange(event) {
@@ -32,6 +33,16 @@ class BudgetRow extends React.Component {
   allocateMoney(value) {
     console.log(value);
     this.setState({ totalAvailable: this.state.totalAvailable - value });
+  }
+
+  addNewTransaction(obj) {
+    return axios
+      .post("/api/budget/transactions", obj)
+      .then(data => {
+        if (data.status !== 201) throw data;
+        else this.fetchAllTransactions();
+      })
+      .catch(errorHanlder);
   }
 
   render() {
@@ -102,7 +113,10 @@ class BudgetRow extends React.Component {
             Add Transaction
           </button>
           {this.state.addTransClicked && (
-            <TransactionAdd budgetMoney={this.allocateMoney} />
+            <TransactionAdd
+              budgetMoney={this.allocateMoney}
+              addNewTrans={this.addNewTransaction}
+            />
           )}
           {this.state.budget.transactions.map(trans => (
             <Transactions key={trans._id} transaction={trans} />

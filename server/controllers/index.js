@@ -50,5 +50,6 @@ module.exports = {
         res.json([...categorySet.keys()]);
       })
       .catch(serverErrorHandler.bind(null, res));
-  }
+  },
+  addTransaction: (req, res) => {}
 };
