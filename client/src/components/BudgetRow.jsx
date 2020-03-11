@@ -26,10 +26,6 @@ class BudgetRow extends React.Component {
     this.setState({ clicked: !this.state.clicked });
   }
 
-  handleClick() {
-    this.setState({ clicked: !this.state.clicked });
-  }
-
   render() {
     return (
       <div>

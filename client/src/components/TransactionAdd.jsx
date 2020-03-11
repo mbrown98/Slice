@@ -4,7 +4,15 @@ import ReactDOM from "react-dom";
 class TransactionAdd extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      name: this.props.name,
+      budget: this.props.budget,
+      date: this.props.date,
+      description: this.props.description,
+      amount: this.props.amount,
+      clicked: false,
+      addTransClicked: false
+    };
   }
   render() {
     return (
