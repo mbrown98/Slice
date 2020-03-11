@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Transactions from "./Transactions.jsx";
 
 class BudgetRow extends React.Component {
   constructor(props) {
@@ -14,7 +15,6 @@ class BudgetRow extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleNameChange = this.handleNameChange.bind(this);
   }
 
   handleChange(event) {
@@ -24,15 +24,14 @@ class BudgetRow extends React.Component {
     this.setState({ clicked: !this.state.clicked });
   }
 
-  handleNameChange(event) {
-    this.setState({ name: this.state.typedName });
+  handleClick() {
     this.setState({ clicked: !this.state.clicked });
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.handleClick}></button>
+        <button onClick={this.handleClick}>Edit</button>
         <div>
           <div>
             <h3>
@@ -87,12 +86,12 @@ class BudgetRow extends React.Component {
           <h4>Transactions</h4>
           {this.props.transactions.map(trans => {
             return (
-              <div>
-                <p>
-                  Date: {trans.date} Description: {trans.description} Amount:{" "}
-                  {trans.amount} Category: {trans.category}
-                </p>
-              </div>
+              <Transactions
+                date={trans.date}
+                description={trans.description}
+                amount={trans.amount}
+                category={trans.category}
+              />
             );
           })}
         </div>
