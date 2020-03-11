@@ -5,7 +5,6 @@ class Transactions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: this.props.date,
       description: this.props.description,
       amount: this.props.amount,
       category: this.props.category,
@@ -27,17 +26,6 @@ class Transactions extends React.Component {
     return (
       <div>
         <h5>
-          Date:{" "}
-          {this.state.clicked ? (
-            <input
-              type="text"
-              name="date"
-              value={this.state.date}
-              onChange={this.handleChange}
-            />
-          ) : (
-            this.state.date
-          )}{" "}
           Description:{" "}
           {this.state.clicked ? (
             <input
@@ -69,7 +57,7 @@ class Transactions extends React.Component {
               onChange={this.handleChange}
             />
           ) : (
-            this.state.date
+            this.state.category
           )}{" "}
           <button onClick={this.handleClick}>Edit</button>
         </h5>

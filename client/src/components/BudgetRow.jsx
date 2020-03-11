@@ -9,7 +9,6 @@ class BudgetRow extends React.Component {
     this.state = {
       name: this.props.name,
       budget: this.props.budget,
-      date: this.props.date,
       description: this.props.description,
       amount: this.props.amount,
       clicked: false,
@@ -93,7 +92,6 @@ class BudgetRow extends React.Component {
           {this.props.transactions.map(trans => {
             return (
               <Transactions
-                date={trans.date}
                 description={trans.description}
                 amount={trans.amount}
                 category={trans.category}

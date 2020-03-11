@@ -7,7 +7,7 @@ class TransactionAdd extends React.Component {
     this.state = {
       name: this.props.name,
       budget: this.props.budget,
-      date: this.props.date,
+
       description: this.props.description,
       amount: this.props.amount,
       clicked: false,
