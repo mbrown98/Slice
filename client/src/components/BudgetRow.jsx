@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Transactions from "./Transactions.jsx";
+import TransactionAdd from "./TransactionAdd.jsx";
 
 class BudgetRow extends React.Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class BudgetRow extends React.Component {
       date: this.props.date,
       description: this.props.description,
       amount: this.props.amount,
-      clicked: false
+      clicked: false,
+      addTransClicked: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -67,7 +69,7 @@ class BudgetRow extends React.Component {
 
           <div>
             <h3>
-              Budget:{" "}
+              Description:{" "}
               {this.state.clicked ? (
                 <input
                   type="text"
@@ -84,6 +86,14 @@ class BudgetRow extends React.Component {
 
         <div>
           <h4>Transactions</h4>
+          <button
+            onClick={() =>
+              this.setState({ addTransClicked: !this.state.addTransClicked })
+            }
+          >
+            Add Transaction
+          </button>
+          {this.state.addTransClicked && <TransactionAdd />}
           {this.props.transactions.map(trans => {
             return (
               <Transactions
