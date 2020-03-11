@@ -36,5 +36,19 @@ module.exports = {
         else res.json(req.body);
       })
       .catch(serverErrorHandler.bind(null, res));
+  },
+  getAllCategories: (req, res) => {
+    Budget.find()
+      .then(data => {
+        const categorySet = new Set();
+        data.forEach(budget => {
+          // budget.transactions.forEach(trans => {
+          //   categorySet.add(trans.category);
+          // });
+          categorySet.add(...budget.transactions.map(trans => trans.category));
+        });
+        res.json([...categorySet.keys()]);
+      })
+      .catch(serverErrorHandler.bind(null, res));
   }
 };
