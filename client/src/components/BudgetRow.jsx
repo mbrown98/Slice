@@ -31,11 +31,10 @@ class BudgetRow extends React.Component {
   render() {
     return (
       <div id="BudgetRow" className="card box">
-        <div className="card-header-title is-pulled-right">
+        <div className="buttons is-pulled-right">
           <button className="button is-primary" onClick={this.handleEdit}>
             Edit
           </button>
-          <div className="divider"></div>
           <button className="delete"></button>
         </div>
         <div className="card-content">
