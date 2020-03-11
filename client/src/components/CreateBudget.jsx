@@ -7,7 +7,6 @@ class CreateBudget extends React.Component {
       name: null,
       budget: null,
       description: null,
-      amount: null,
       clicked: false
     };
     this.handleChange = this.handleChange.bind(this);
@@ -19,15 +18,21 @@ class CreateBudget extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
   handleClick() {
+    this.setState({ clicked: !this.state.clicked });
+  }
+  addBudget() {
     //will send new data to database to be inserted
     //then repopulated database and rerender
     //probably a function passed down as a prop from app.jsx
     this.setState({ clicked: !this.state.clicked });
+    let obj = {
+      name: this.state.name,
+      budget: Number(this.state.budget),
+      description: this.state.description
+    };
+    this.props.createBudget(obj);
   }
 
-  addBudget() {
-    console.log("hi");
-  }
   render() {
     return (
       <div>
@@ -38,7 +43,7 @@ class CreateBudget extends React.Component {
               Name:{" "}
               <input
                 type="text"
-                name="description"
+                name="name"
                 value={this.state.name}
                 onChange={this.handleChange}
               />
@@ -49,18 +54,11 @@ class CreateBudget extends React.Component {
                 value={this.state.description}
                 onChange={this.handleChange}
               />
-              Amount:{" "}
+              Budget:{" "}
               <input
                 type="text"
-                name="amount"
+                name="budget"
                 value={this.state.amount}
-                onChange={this.handleChange}
-              />
-              Category:{" "}
-              <input
-                type="text"
-                name="category"
-                value={this.state.category}
                 onChange={this.handleChange}
               />
               <button onClick={this.addBudget}>Add To Budget List</button>
