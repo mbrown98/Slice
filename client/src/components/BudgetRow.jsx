@@ -1,44 +1,35 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Transactions from "./Transactions.jsx";
-import TransactionAdd from "./TransactionAdd.jsx";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Transactions from './Transactions.jsx';
+import TransactionAdd from './TransactionAdd.jsx';
 
 class BudgetRow extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: this.props.name,
-      budget: this.props.budget,
-      date: this.props.date,
-      description: this.props.description,
-      amount: this.props.amount,
-      clicked: false,
-      addTransClicked: false
-    };
+    this.state = Object.assign(
+      { isEditing: false, addTransClicked: false },
+      props.budget
+    );
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
-  handleClick() {
-    this.setState({ clicked: !this.state.clicked });
-  }
-
-  handleClick() {
-    this.setState({ clicked: !this.state.clicked });
+  handleEdit() {
+    this.setState({ isEditing: !this.state.isEditing });
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.handleClick}>Edit</button>
+        <button onClick={this.handleEdit}>Edit</button>
         <div>
           <div>
             <h3>
-              Name:{" "}
-              {this.state.clicked ? (
+              Name:{' '}
+              {this.state.isEditing ? (
                 <input
                   type="text"
                   name="name"
@@ -53,8 +44,8 @@ class BudgetRow extends React.Component {
 
           <div>
             <h3>
-              Budget:{" "}
-              {this.state.clicked ? (
+              Budget:{' '}
+              {this.state.isEditing ? (
                 <input
                   type="text"
                   name="budget"
@@ -69,8 +60,8 @@ class BudgetRow extends React.Component {
 
           <div>
             <h3>
-              Description:{" "}
-              {this.state.clicked ? (
+              Description:{' '}
+              {this.state.isEditing ? (
                 <input
                   type="text"
                   name="description"
@@ -94,16 +85,9 @@ class BudgetRow extends React.Component {
             Add Transaction
           </button>
           {this.state.addTransClicked && <TransactionAdd />}
-          {this.props.transactions.map(trans => {
-            return (
-              <Transactions
-                date={trans.date}
-                description={trans.description}
-                amount={trans.amount}
-                category={trans.category}
-              />
-            );
-          })}
+          {this.state.transactions.map(trans => (
+            <Transactions key={trans._id} transaction={trans} />
+          ))}
         </div>
       </div>
     );

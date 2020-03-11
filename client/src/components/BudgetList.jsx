@@ -1,6 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import BudgetRow from "./BudgetRow.jsx";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import BudgetRow from './BudgetRow.jsx';
 
 class BudgetList extends React.Component {
   constructor(props) {
@@ -10,17 +10,9 @@ class BudgetList extends React.Component {
   render() {
     return (
       <div>
-        {this.props.budgets.map(budget => {
-          return (
-            <BudgetRow
-              key={budget.name}
-              name={budget.name}
-              budget={budget.budget}
-              description={budget.description}
-              transactions={budget.transactions}
-            />
-          );
-        })}
+        {this.props.budgets.map(budget => (
+          <BudgetRow key={budget._id} budget={budget} />
+        ))}
       </div>
     );
   }

@@ -1,22 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 class Transactions extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      date: this.props.date,
-      description: this.props.description,
-      amount: this.props.amount,
-      category: this.props.category,
-      clicked: false
-    };
-    this.handleClick = this.handleClick.bind(this);
+    this.state = Object.assign({ isEditing: false }, props.transaction);
+    this.handleEdit = this.handleEdit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleClick() {
-    this.setState({ clicked: !this.state.clicked });
+  handleEdit() {
+    this.setState({ isEditing: !this.state.isEditing });
   }
 
   handleChange(event) {
@@ -27,19 +21,8 @@ class Transactions extends React.Component {
     return (
       <div>
         <h5>
-          Date:{" "}
-          {this.state.clicked ? (
-            <input
-              type="text"
-              name="date"
-              value={this.state.date}
-              onChange={this.handleChange}
-            />
-          ) : (
-            this.state.date
-          )}{" "}
-          Description:{" "}
-          {this.state.clicked ? (
+          Description:{' '}
+          {this.state.isEditing ? (
             <input
               type="text"
               name="description"
@@ -48,9 +31,9 @@ class Transactions extends React.Component {
             />
           ) : (
             this.state.description
-          )}{" "}
-          Amount:{" "}
-          {this.state.clicked ? (
+          )}{' '}
+          Amount:{' '}
+          {this.state.isEditing ? (
             <input
               type="text"
               name="amount"
@@ -59,9 +42,9 @@ class Transactions extends React.Component {
             />
           ) : (
             this.state.amount
-          )}{" "}
-          Category:{" "}
-          {this.state.clicked ? (
+          )}{' '}
+          Category:{' '}
+          {this.state.isEditing ? (
             <input
               type="text"
               name="category"
@@ -69,9 +52,9 @@ class Transactions extends React.Component {
               onChange={this.handleChange}
             />
           ) : (
-            this.state.date
-          )}{" "}
-          <button onClick={this.handleClick}>Edit</button>
+            this.state.category
+          )}{' '}
+          <button onClick={this.handleEdit}>Edit</button>
         </h5>
       </div>
     );
