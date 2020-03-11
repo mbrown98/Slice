@@ -25,9 +25,8 @@ class Transactions extends React.Component {
 
   render() {
     return (
-      <div>
-        <h5>
-          Description:{" "}
+      <tr>
+        <td>
           {this.state.isEditing ? (
             <input
               type="text"
@@ -38,7 +37,8 @@ class Transactions extends React.Component {
           ) : (
             this.state.transaction.description
           )}{" "}
-          Amount:{" "}
+        </td>
+        <td>
           {this.state.isEditing ? (
             <input
               type="text"
@@ -49,7 +49,8 @@ class Transactions extends React.Component {
           ) : (
             this.state.transaction.amount
           )}{" "}
-          Category:{" "}
+        </td>
+        <td>
           {this.state.isEditing ? (
             <input
               type="text"
@@ -60,9 +61,9 @@ class Transactions extends React.Component {
           ) : (
             this.state.transaction.category
           )}{" "}
-          <button onClick={this.handleEdit}>Edit</button>
-        </h5>
-      </div>
+        </td>
+        <button onClick={this.handleEdit}>Edit</button>
+      </tr>
     );
   }
 }
