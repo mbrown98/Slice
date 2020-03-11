@@ -91,6 +91,10 @@ class BudgetRow extends React.Component {
             </div>
 
             <div>
+              <h3>Available: </h3>
+            </div>
+
+            <div>
               <h3>
                 Description:{" "}
                 {this.state.isEditing ? (
