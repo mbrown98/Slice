@@ -25,7 +25,7 @@ class Transactions extends React.Component {
 
   render() {
     return (
-      <tr>
+      <tr className="is-verticaled">
         <td>
           {this.state.isEditing ? (
             <input
@@ -62,7 +62,17 @@ class Transactions extends React.Component {
             this.state.transaction.category
           )}{" "}
         </td>
-        <button onClick={this.handleEdit}>Edit</button>
+        <div className="buttons">
+          <button className="button is-info is-small" onClick={this.handleEdit}>
+            Edit
+          </button>
+          <button
+            className="button is-danger is-small"
+            onClick={() => console.log("delete button clicked")}
+          >
+            Delete
+          </button>
+        </div>
       </tr>
     );
   }
