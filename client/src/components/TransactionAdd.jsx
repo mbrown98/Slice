@@ -13,7 +13,16 @@ class TransactionAdd extends React.Component {
       clicked: false,
       addTransClicked: false
     };
+    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+  handleClick() {
+    this.props.budgetMoney(this.state.amount);
+  }
+
   render() {
     return (
       <div>

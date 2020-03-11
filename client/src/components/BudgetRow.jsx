@@ -6,11 +6,12 @@ class BudgetRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = Object.assign(
-      { isEditing: false, addTransClicked: false },
+      { isEditing: false, addTransClicked: false, totalAvailable: 500 },
       { budget: props.budget }
     );
     this.handleChange = this.handleChange.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.allocateMoney = this.allocateMoney.bind(this);
   }
 
   handleChange(event) {
@@ -26,6 +27,11 @@ class BudgetRow extends React.Component {
   handleEdit() {
     this.setState({ isEditing: !this.state.isEditing });
     this.props.handleUpdate(this.state.budget);
+  }
+
+  allocateMoney(value) {
+    console.log(value);
+    this.setState({ totalAvailable: this.state.totalAvailable - value });
   }
 
   render() {
@@ -66,6 +72,10 @@ class BudgetRow extends React.Component {
           </div>
 
           <div>
+            <h3>Amount Left: {this.state.totalAvailable}</h3>
+          </div>
+
+          <div>
             <h3>
               Description:{" "}
               {this.state.isEditing ? (
@@ -91,7 +101,9 @@ class BudgetRow extends React.Component {
           >
             Add Transaction
           </button>
-          {this.state.addTransClicked && <TransactionAdd />}
+          {this.state.addTransClicked && (
+            <TransactionAdd budgetMoney={this.allocateMoney} />
+          )}
           {this.state.budget.transactions.map(trans => (
             <Transactions key={trans._id} transaction={trans} />
           ))}
