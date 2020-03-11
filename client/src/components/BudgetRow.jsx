@@ -1,24 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Transactions from './Transactions.jsx';
-import TransactionAdd from './TransactionAdd.jsx';
+import React from "react";
+import Transactions from "./Transactions.jsx";
+import TransactionAdd from "./TransactionAdd.jsx";
 
 class BudgetRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = Object.assign(
       { isEditing: false, addTransClicked: false },
-      props.budget
+      { budget: props.budget }
     );
     this.handleChange = this.handleChange.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+    const currentBudget = {
+      ...this.state.budget,
+      [event.target.name]: event.target.value
+    };
+    // These two commented lines equals to the line above
+    // const currentBudget = { ...this.state.budget };
+    // currentBudget[event.target.name] = event.target.value;
+    this.setState({ budget: currentBudget });
   }
   handleEdit() {
     this.setState({ isEditing: !this.state.isEditing });
+    this.props.handleUpdate(this.state.budget);
   }
 
   render() {
@@ -28,48 +35,48 @@ class BudgetRow extends React.Component {
         <div>
           <div>
             <h3>
-              Name:{' '}
+              Name:{" "}
               {this.state.isEditing ? (
                 <input
                   type="text"
                   name="name"
-                  value={this.state.name}
+                  value={this.state.budget.name}
                   onChange={this.handleChange}
                 />
               ) : (
-                this.state.name
+                this.state.budget.name
               )}
             </h3>
           </div>
 
           <div>
             <h3>
-              Budget:{' '}
+              Budget:{" "}
               {this.state.isEditing ? (
                 <input
                   type="text"
                   name="budget"
-                  value={this.state.budget}
+                  value={this.state.budget.budget}
                   onChange={this.handleChange}
                 />
               ) : (
-                this.state.budget
+                this.state.budget.budget
               )}
             </h3>
           </div>
 
           <div>
             <h3>
-              Description:{' '}
+              Description:{" "}
               {this.state.isEditing ? (
                 <input
                   type="text"
                   name="description"
-                  value={this.state.description}
+                  value={this.state.budget.description}
                   onChange={this.handleChange}
                 />
               ) : (
-                this.state.description
+                this.state.budget.description
               )}
             </h3>
           </div>
@@ -85,7 +92,7 @@ class BudgetRow extends React.Component {
             Add Transaction
           </button>
           {this.state.addTransClicked && <TransactionAdd />}
-          {this.state.transactions.map(trans => (
+          {this.state.budget.transactions.map(trans => (
             <Transactions key={trans._id} transaction={trans} />
           ))}
         </div>

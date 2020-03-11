@@ -1,10 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
 
 class Transactions extends React.Component {
   constructor(props) {
     super(props);
-    this.state = Object.assign({ isEditing: false }, props.transaction);
+    this.state = Object.assign(
+      { isEditing: false },
+      { transaction: props.transaction }
+    );
     this.handleEdit = this.handleEdit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -14,46 +16,50 @@ class Transactions extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+    const currentTransaction = {
+      ...this.state.transaction,
+      [event.target.name]: event.target.value
+    };
+    this.setState({ transaction: currentTransaction });
   }
 
   render() {
     return (
       <div>
         <h5>
-          Description:{' '}
+          Description:{" "}
           {this.state.isEditing ? (
             <input
               type="text"
               name="description"
-              value={this.state.description}
+              value={this.state.transaction.description}
               onChange={this.handleChange}
             />
           ) : (
-            this.state.description
-          )}{' '}
-          Amount:{' '}
+            this.state.transaction.description
+          )}{" "}
+          Amount:{" "}
           {this.state.isEditing ? (
             <input
               type="text"
               name="amount"
-              value={this.state.amount}
+              value={this.state.transaction.amount}
               onChange={this.handleChange}
             />
           ) : (
-            this.state.amount
-          )}{' '}
-          Category:{' '}
+            this.state.transaction.amount
+          )}{" "}
+          Category:{" "}
           {this.state.isEditing ? (
             <input
               type="text"
               name="category"
-              value={this.state.category}
+              value={this.state.transaction.category}
               onChange={this.handleChange}
             />
           ) : (
-            this.state.category
-          )}{' '}
+            this.state.transaction.category
+          )}{" "}
           <button onClick={this.handleEdit}>Edit</button>
         </h5>
       </div>

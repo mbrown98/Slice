@@ -1,10 +1,10 @@
-const Budget = require('../../database');
-const { serverErrorHandler } = require('../../utils');
+const Budget = require("../../database");
+const { serverErrorHandler } = require("../../utils");
 
 module.exports = {
   getAllBudgets: (req, res) => {
     Budget.find()
-      .sort({ 'timestamps.createdAt': -1, 'timestamps.updatedAt': -1 })
+      .sort({ "timestamps.createdAt": -1, "timestamps.updatedAt": -1 })
       .then(data => {
         res.json(data);
       })
