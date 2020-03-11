@@ -30,7 +30,7 @@ class CreateBudget extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="box">
         <h2 onClick={this.handleClick}>Create Budget</h2>
         {this.state.clicked && (
           <div>
