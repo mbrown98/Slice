@@ -1,5 +1,6 @@
 import React from "react";
 import BudgetList from "./components/BudgetList.jsx";
+import CreateBudget from "./components/CreateBudget";
 import axios from "axios";
 import { errorHanlder } from "../../utils";
 
@@ -64,6 +65,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Budget App</h1>
+        <CreateBudget />
 
         <BudgetList budgets={this.state.budgets} />
       </div>
