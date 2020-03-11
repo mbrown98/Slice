@@ -6,11 +6,13 @@ class BudgetRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = Object.assign(
-      { isEditing: false, addTransClicked: false },
+      { isEditing: false, addTransClicked: false, totalAvailable: 500 },
       { budget: props.budget }
     );
     this.handleChange = this.handleChange.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.allocateMoney = this.allocateMoney.bind(this);
+    this.addNewTransaction = this.addNewTransaction.bind(this);
   }
 
   handleChange(event) {
@@ -26,6 +28,21 @@ class BudgetRow extends React.Component {
   handleEdit() {
     this.setState({ isEditing: !this.state.isEditing });
     this.props.handleUpdate(this.state.budget);
+  }
+
+  allocateMoney(value) {
+    console.log(value);
+    this.setState({ totalAvailable: this.state.totalAvailable - value });
+  }
+
+  addNewTransaction(obj) {
+    return axios
+      .post("/api/budget/transactions", obj)
+      .then(data => {
+        if (data.status !== 201) throw data;
+        else this.fetchAllTransactions();
+      })
+      .catch(errorHanlder);
   }
 
   render() {
@@ -71,6 +88,10 @@ class BudgetRow extends React.Component {
                   this.state.budget.budget
                 )}
               </h3>
+            </div>
+
+            <div>
+              <h3>Available: </h3>
             </div>
 
             <div>

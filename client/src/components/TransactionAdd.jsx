@@ -5,15 +5,28 @@ class TransactionAdd extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.name,
-      budget: this.props.budget,
-
-      description: this.props.description,
-      amount: this.props.amount,
+      description: null,
+      amount: null,
+      category: null,
       clicked: false,
       addTransClicked: false
     };
+    this.addNewTransaction = this.addNewTransaction.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+  addNewTransaction() {
+    this.props.budgetMoney(this.state.amount);
+    let obj = {
+      category: this.state.category,
+      description: this.state.description,
+      amount: Number(this.state.amount)
+    };
+    this.props.addNewTrans(obj);
+  }
+
   render() {
     return (
       <div>
@@ -39,7 +52,7 @@ class TransactionAdd extends React.Component {
             value={this.state.category}
             onChange={this.handleChange}
           />
-          <button onClick={this.handleClick}>Add New</button>
+          <button onClick={this.addNewTransaction}>Add New</button>
         </h5>
       </div>
     );
