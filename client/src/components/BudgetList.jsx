@@ -8,7 +8,7 @@ class BudgetList extends React.Component {
   }
   render() {
     return (
-      <div className="container" id="BudgetList">
+      <div className="block" id="BudgetList">
         {this.props.budgets.map(budget => (
           <BudgetRow
             key={budget._id}
