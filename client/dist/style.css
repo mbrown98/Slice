@@ -3,6 +3,12 @@
   margin-bottom: 36px;
 }
 
+.divider {
+  width: 12px;
+  height: auto;
+  display: inline-block;
+}
+
 h1 {
   text-align: center;
 }
