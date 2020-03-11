@@ -30,7 +30,7 @@ class BudgetRow extends React.Component {
 
   render() {
     return (
-      <div id="BudgetRow" classNam="">
+      <div id="BudgetRow" className="box">
         <button onClick={this.handleEdit}>Edit</button>
         <div>
           <div>

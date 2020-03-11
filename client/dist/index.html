@@ -3,11 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
     <title>Budget-Hackathon</title>
   </head>
   <body>
-    <h1>Budget App</h1>
-    <div id="app"></div>
+    <div class="container">
+      <h1 class="title">Budget App</h1>
+      <article class="message">
+        <div class="message-header">
+          <p>Budget Tips:</p>
+        </div>
+        <div class="message-body">
+          <label class="subtitle is-4"
+            >Budget to zero before the month begins:</label
+          >
+          <p>
+            This means before the month even starts, you’re making a plan and
+            giving every dollar a name. It’s called a zero-based budget. Now
+            that doesn’t mean you have zero dollars in your bank account. It
+            just means your income minus all your expenses (outgo) equals zero.
+          </p>
+        </div>
+      </article>
+      <div id="app"></div>
+    </div>
     <script src="bundle.js"></script>
   </body>
 </html>
