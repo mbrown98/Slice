@@ -96,7 +96,12 @@ class BudgetRow extends React.Component {
             </div>
 
             <div>
-              <h3>Available: </h3>
+              Available:{" "}
+              {this.state.budget.budget -
+                this.state.budget.transactions.reduce(
+                  (a, b) => a + b.amount,
+                  0
+                )}
             </div>
 
             <div>
