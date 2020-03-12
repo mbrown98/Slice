@@ -45,13 +45,13 @@ class BudgetRow extends React.Component {
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
     var color = d3.scaleOrdinal([
-      "gray",
-      "green",
-      "brown",
-      "orange",
-      "yellow",
-      "red",
-      "purple"
+      "#69e5ae",
+      "#147349",
+      "#aaf0d1",
+      "#d8d8d8",
+      "#09301f",
+      "#f0aeaa",
+      "#062014"
     ]);
 
     var pie = d3.pie().value(function(d) {
@@ -196,7 +196,7 @@ class BudgetRow extends React.Component {
 
             <div>
               <h3>
-                Budget:{" $"}
+                Budget:{" "}
                 {this.state.isEditing ? (
                   <input
                     className="input"
@@ -212,7 +212,7 @@ class BudgetRow extends React.Component {
             </div>
 
             <div>
-              Available:{" $"}
+              Available:{" "}
               {Number(this.state.budget.budget) -
                 this.state.budget.transactions.reduce(
                   (a, b) => Number(a) + Number(b.amount),
