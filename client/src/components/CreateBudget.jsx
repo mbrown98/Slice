@@ -40,7 +40,7 @@ class CreateBudget extends React.Component {
           className="button is-primary is-large"
           onClick={this.handleClick}
         >
-          Create Budget
+          New Pie
         </button>
         {this.state.clicked && (
           <div>

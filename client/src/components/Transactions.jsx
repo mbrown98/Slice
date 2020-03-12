@@ -9,6 +9,13 @@ class Transactions extends React.Component {
     );
     this.handleEdit = this.handleEdit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete() {
+    let obj = { ...this.state.transaction };
+    let name = obj.description;
+    this.props.handleDelete(name);
   }
 
   handleEdit() {
@@ -75,7 +82,7 @@ class Transactions extends React.Component {
             </button>
             <button
               className="button is-danger is-small"
-              onClick={() => console.log("delete button clicked")}
+              onClick={this.handleDelete}
             >
               Delete
             </button>
