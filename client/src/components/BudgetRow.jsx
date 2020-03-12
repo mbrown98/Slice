@@ -44,8 +44,8 @@ class BudgetRow extends React.Component {
       }
     }
 
-    this.setState({ budget: newBudget });
     this.props.handleUpdate(newBudget);
+    this.setState({ budget: newBudget });
   }
 
   allocateMoney(value) {
@@ -122,9 +122,9 @@ class BudgetRow extends React.Component {
 
             <div>
               Available:{" $"}
-              {this.state.budget.budget -
+              {Number(this.state.budget.budget) -
                 this.state.budget.transactions.reduce(
-                  (a, b) => a + b.amount,
+                  (a, b) => Number(a) + Number(b.amount),
                   0
                 )}
             </div>
