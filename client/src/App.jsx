@@ -53,6 +53,7 @@ class App extends React.Component {
   }
 
   handleUpdateBudget(budget) {
+    console.log("id", budget._id);
     return axios
       .put(`/api/budget/${budget._id}`, budget)
       .then(data => {

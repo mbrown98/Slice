@@ -21,10 +21,10 @@ module.exports = {
   updateBudget: (req, res) => {
     const { id } = req.params;
     const updatedBudget = req.body;
-    Budget.findOneAndUpdate({ _id: id }, updatedBudget)
+    Budget.findOneAndUpdate({ _id: id }, updatedBudget, { upsert: true })
       .then(data => {
         if (!data) throw data;
-        else res.json(updatedBudget);
+        else res.status(201).json(data);
       })
       .catch(serverErrorHandler.bind(null, res));
   },
@@ -50,6 +50,5 @@ module.exports = {
         res.json([...categorySet.keys()]);
       })
       .catch(serverErrorHandler.bind(null, res));
-  },
-  addTransaction: (req, res) => {}
+  }
 };
