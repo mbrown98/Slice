@@ -13,6 +13,7 @@ class BudgetRow extends React.Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.allocateMoney = this.allocateMoney.bind(this);
     this.addNewTransaction = this.addNewTransaction.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
 
   handleChange(event) {
@@ -45,6 +46,10 @@ class BudgetRow extends React.Component {
       .catch(errorHanlder);
   }
 
+  handleDeleteClick(e) {
+    this.props.handleDelete(this.state.budget);
+  }
+
   render() {
     return (
       <div id="BudgetRow" className="card box">
@@ -52,7 +57,9 @@ class BudgetRow extends React.Component {
           <button className="button is-primary" onClick={this.handleEdit}>
             Edit
           </button>
-          <button className="button is-danger">Delete</button>
+          <button className="button is-danger" onClick={this.handleDeleteClick}>
+            Delete
+          </button>
         </div>
         <div className="card-content">
           <div>
