@@ -91,7 +91,7 @@ class BudgetRow extends React.Component {
                     onChange={this.handleChange}
                   />
                 ) : (
-                  this.state.budget.budget
+                  "$" + this.state.budget.budget
                 )}
               </h3>
             </div>
