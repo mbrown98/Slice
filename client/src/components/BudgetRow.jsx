@@ -26,14 +26,14 @@ class BudgetRow extends React.Component {
       const index = acc.map(item => item.category).indexOf(cur.category);
       console.log(`index: ${index}`);
       if (index === -1) {
-        acc.push({ category: cur.category, count: 1 });
+        acc.push({ category: cur.category, amount: cur.amount });
       } else {
-        acc[index].count = acc[index].count + 1;
+        acc[index].amount = acc[index].amount + cur.amount;
       }
       return acc;
     }, []);
     const totalCount = jsonData.reduce((acc, cur) => {
-      return (acc += cur.count);
+      return (acc += cur.amount);
     }, 0);
     var svg = d3.select(`[id="${this.state.budget._id}"]`),
       width = svg.attr("width"),
@@ -54,8 +54,23 @@ class BudgetRow extends React.Component {
       "purple"
     ]);
 
+    // var categorical = [
+    //   { "name" : "schemeAccent", "n": 8},
+    //   { "name" : "schemeDark2", "n": 8},
+    //   { "name" : "schemePastel2", "n": 8},
+    //   { "name" : "schemeSet2", "n": 8},
+    //   { "name" : "schemeSet1", "n": 9},
+    //   { "name" : "schemePastel1", "n": 9},
+    //   { "name" : "schemeCategory10", "n" : 10},
+    //   { "name" : "schemeSet3", "n" : 12 },
+    //   { "name" : "schemePaired", "n": 12},
+    //   { "name" : "schemeCategory20", "n" : 20 },
+    //   { "name" : "schemeCategory20b", "n" : 20},
+    //   { "name" : "schemeCategory20c", "n" : 20 }
+    // ]
+
     var pie = d3.pie().value(function(d) {
-      return d.count;
+      return d.amount;
     });
 
     var path = d3
@@ -92,14 +107,14 @@ class BudgetRow extends React.Component {
       .text(function(d) {
         return `${
           d.data.category
-        }: ${((d.data.count / totalCount).toFixed(2) * 100).toFixed(1)}%`;
+        }: ${((d.data.amount / totalCount).toFixed(2) * 100).toFixed(1)}%`;
       });
 
     svg
       .append("g")
       .attr("transform", "translate(" + (width / 2 - 200) + "," + 25 + ")")
       .append("text")
-      .text("Categories")
+      .text("Transactions")
       .attr("class", "title");
   }
 
