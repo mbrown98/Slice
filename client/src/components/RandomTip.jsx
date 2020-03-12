@@ -25,7 +25,7 @@ class RandomTip extends React.Component {
 
   render() {
     return (
-      <article className="message">
+      <article className="message is-primary">
         <div className="message-header">
           <p>Budget Tips:</p>
         </div>
