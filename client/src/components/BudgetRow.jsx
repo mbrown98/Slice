@@ -35,7 +35,7 @@ class BudgetRow extends React.Component {
           <button className="button is-primary" onClick={this.handleEdit}>
             Edit
           </button>
-          <button className="delete"></button>
+          <button className="button is-danger">Delete</button>
         </div>
         <div className="card-content">
           <div>

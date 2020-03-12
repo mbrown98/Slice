@@ -36,12 +36,18 @@ class CreateBudget extends React.Component {
   render() {
     return (
       <div className="box">
-        <h2 onClick={this.handleClick}>Create Budget</h2>
+        <button
+          className="button is-primary is-large"
+          onClick={this.handleClick}
+        >
+          Create Budget
+        </button>
         {this.state.clicked && (
           <div>
             <h5>
               Name:{" "}
               <input
+                className="input is-info"
                 type="text"
                 name="name"
                 value={this.state.name}
@@ -49,6 +55,7 @@ class CreateBudget extends React.Component {
               />
               Description:{" "}
               <input
+                className="input is-info"
                 type="text"
                 name="description"
                 value={this.state.description}
@@ -56,12 +63,17 @@ class CreateBudget extends React.Component {
               />
               Budget:{" "}
               <input
+                className="input is-info"
                 type="text"
                 name="budget"
                 value={this.state.amount}
                 onChange={this.handleChange}
               />
-              <button onClick={this.addBudget}>Add To Budget List</button>
+              <br />
+              <br />
+              <button className="button is-info" onClick={this.addBudget}>
+                Add To Budget List
+              </button>
             </h5>
           </div>
         )}

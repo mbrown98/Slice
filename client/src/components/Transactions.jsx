@@ -29,6 +29,7 @@ class Transactions extends React.Component {
         <td>
           {this.state.isEditing ? (
             <input
+              className="input is-info"
               type="text"
               name="description"
               value={this.state.transaction.description}
@@ -41,6 +42,7 @@ class Transactions extends React.Component {
         <td>
           {this.state.isEditing ? (
             <input
+              className="input is-info"
               type="text"
               name="amount"
               value={this.state.transaction.amount}
@@ -53,6 +55,7 @@ class Transactions extends React.Component {
         <td>
           {this.state.isEditing ? (
             <input
+              className="input is-info"
               type="text"
               name="category"
               value={this.state.transaction.category}
