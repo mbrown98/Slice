@@ -1,6 +1,8 @@
 import React from "react";
 import Transactions from "./Transactions.jsx";
 import TransactionAdd from "./TransactionAdd.jsx";
+import axios from "axios";
+import { errorHanlder } from "../../../utils";
 
 class BudgetRow extends React.Component {
   constructor(props) {
@@ -37,13 +39,10 @@ class BudgetRow extends React.Component {
   }
 
   addNewTransaction(obj) {
-    return axios
-      .post("/api/budget/transactions", obj)
-      .then(data => {
-        if (data.status !== 201) throw data;
-        else this.fetchAllTransactions();
-      })
-      .catch(errorHanlder);
+    let newBudget = { ...this.state.budget };
+    newBudget.transactions.push(obj);
+    console.log(newBudget);
+    this.props.handleUpdate(newBudget);
   }
 
   handleDeleteClick(e) {
@@ -128,7 +127,9 @@ class BudgetRow extends React.Component {
             >
               Add Transaction
             </button>
-            {this.state.addTransClicked && <TransactionAdd />}
+            {this.state.addTransClicked && (
+              <TransactionAdd addNewTrans={this.addNewTransaction} />
+            )}
             <table className="table is-striped">
               <thead>
                 <tr>

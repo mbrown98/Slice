@@ -18,7 +18,7 @@ class TransactionAdd extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
   addNewTransaction() {
-    this.props.budgetMoney(this.state.amount);
+    // this.props.budgetMoney(this.state.amount);
     let obj = {
       category: this.state.category,
       description: this.state.description,
