@@ -33,6 +33,7 @@ class TransactionAdd extends React.Component {
         <h5>
           Description:{" "}
           <input
+            className="input is-info"
             type="text"
             name="description"
             value={this.state.description}
@@ -40,6 +41,7 @@ class TransactionAdd extends React.Component {
           />
           Amount:{" "}
           <input
+            className="input is-info"
             type="text"
             name="amount"
             value={this.state.amount}
@@ -47,12 +49,20 @@ class TransactionAdd extends React.Component {
           />
           Category:{" "}
           <input
+            className="input is-info"
             type="text"
             name="category"
             value={this.state.category}
             onChange={this.handleChange}
           />
-          <button onClick={this.addNewTransaction}>Add New</button>
+          <br />
+          <br />
+          <button
+            className="button is-primary is-info"
+            onClick={this.addNewTransaction}
+          >
+            Add New
+          </button>
         </h5>
       </div>
     );
