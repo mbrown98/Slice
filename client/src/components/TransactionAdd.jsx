@@ -8,8 +8,7 @@ class TransactionAdd extends React.Component {
       description: null,
       amount: null,
       category: null,
-      clicked: false,
-      addTransClicked: false
+      clicked: true
     };
     this.addNewTransaction = this.addNewTransaction.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -19,6 +18,7 @@ class TransactionAdd extends React.Component {
   }
   addNewTransaction() {
     // this.props.budgetMoney(this.state.amount);
+    this.setState({ clicked: false });
     let obj = {
       category: this.state.category,
       description: this.state.description,
@@ -30,40 +30,42 @@ class TransactionAdd extends React.Component {
   render() {
     return (
       <div>
-        <h5>
-          Description:{" "}
-          <input
-            className="input is-info"
-            type="text"
-            name="description"
-            value={this.state.description}
-            onChange={this.handleChange}
-          />
-          Amount:{" "}
-          <input
-            className="input is-info"
-            type="text"
-            name="amount"
-            value={this.state.amount}
-            onChange={this.handleChange}
-          />
-          Category:{" "}
-          <input
-            className="input is-info"
-            type="text"
-            name="category"
-            value={this.state.category}
-            onChange={this.handleChange}
-          />
-          <br />
-          <br />
-          <button
-            className="button is-primary is-info"
-            onClick={this.addNewTransaction}
-          >
-            Add New
-          </button>
-        </h5>
+        {this.state.clicked && (
+          <h5>
+            Description:{" "}
+            <input
+              className="input is-info"
+              type="text"
+              name="description"
+              value={this.state.description}
+              onChange={this.handleChange}
+            />
+            Amount:{" "}
+            <input
+              className="input is-info"
+              type="text"
+              name="amount"
+              value={this.state.amount}
+              onChange={this.handleChange}
+            />
+            Category:{" "}
+            <input
+              className="input is-info"
+              type="text"
+              name="category"
+              value={this.state.category}
+              onChange={this.handleChange}
+            />
+            <br />
+            <br />
+            <button
+              className="button is-primary is-info"
+              onClick={this.addNewTransaction}
+            >
+              Slice It
+            </button>
+          </h5>
+        )}
       </div>
     );
   }

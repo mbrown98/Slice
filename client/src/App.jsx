@@ -1,6 +1,7 @@
 import React from "react";
 import BudgetList from "./components/BudgetList.jsx";
 import CreateBudget from "./components/CreateBudget";
+import RandomTip from "./components/RandomTip";
 import axios from "axios";
 import { errorHanlder } from "../../utils";
 
@@ -53,7 +54,7 @@ class App extends React.Component {
   }
 
   handleUpdateBudget(budget) {
-    console.log("id", budget._id);
+    console.log("handle Update", budget);
     return axios
       .put(`/api/budget/${budget._id}`, budget)
       .then(data => {
@@ -64,13 +65,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="block">
-        <CreateBudget createBudget={this.handleBudgetCreate} />
-        <BudgetList
-          budgets={this.state.budgets}
-          handleUpdate={this.handleUpdateBudget}
-          handleDelete={this.handleDeleteBudget}
-        />
+      <div>
+        <RandomTip />
+        <div className="block">
+          <CreateBudget createBudget={this.handleBudgetCreate} />
+          <BudgetList
+            budgets={this.state.budgets}
+            handleUpdate={this.handleUpdateBudget}
+            handleDelete={this.handleDeleteBudget}
+          />
+        </div>
       </div>
     );
   }

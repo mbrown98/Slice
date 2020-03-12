@@ -16,6 +16,8 @@ class BudgetRow extends React.Component {
     this.allocateMoney = this.allocateMoney.bind(this);
     this.addNewTransaction = this.addNewTransaction.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.handleTransactionDelete = this.handleTransactionDelete.bind(this);
+    this.handleTransactionEdit = this.handleTransactionEdit.bind(this);
   }
 
   updateChart() {
@@ -124,6 +126,19 @@ class BudgetRow extends React.Component {
     this.props.handleUpdate(this.state.budget);
   }
 
+  handleTransactionEdit(trans) {
+    console.log("made it here");
+    let newBudget = { ...this.state.budget };
+    for (let i = 0; i < newBudget.transactions.length; i++) {
+      if (newBudget.transactions[i]._id === trans._id) {
+        newBudget.transactions[i] = trans;
+      }
+    }
+
+    this.props.handleUpdate(newBudget);
+    this.setState({ budget: newBudget });
+  }
+
   allocateMoney(value) {
     console.log(value);
     this.setState({ totalAvailable: this.state.totalAvailable - value });
@@ -132,12 +147,22 @@ class BudgetRow extends React.Component {
   addNewTransaction(obj) {
     let newBudget = { ...this.state.budget };
     newBudget.transactions.push(obj);
-    console.log(newBudget);
+
     this.props.handleUpdate(newBudget);
   }
 
   handleDeleteClick(e) {
     this.props.handleDelete(this.state.budget);
+  }
+
+  handleTransactionDelete(name) {
+    let newBudget = { ...this.state.budget };
+    let transactions = newBudget.transactions.filter(
+      trans => trans.description !== name
+    );
+    newBudget.transactions = transactions;
+    this.props.handleUpdate(newBudget);
+    this.setState({ budget: newBudget });
   }
 
   render() {
@@ -171,7 +196,7 @@ class BudgetRow extends React.Component {
 
             <div>
               <h3>
-                Budget:{" "}
+                Budget:{" $"}
                 {this.state.isEditing ? (
                   <input
                     className="input"
@@ -187,7 +212,12 @@ class BudgetRow extends React.Component {
             </div>
 
             <div>
-              <h3>Available: </h3>
+              Available:{" $"}
+              {Number(this.state.budget.budget) -
+                this.state.budget.transactions.reduce(
+                  (a, b) => Number(a) + Number(b.amount),
+                  0
+                )}
             </div>
 
             <div>
@@ -234,7 +264,12 @@ class BudgetRow extends React.Component {
                 </thead>
                 <tbody>
                   {this.state.budget.transactions.map(trans => (
-                    <Transactions key={trans._id} transaction={trans} />
+                    <Transactions
+                      key={trans._id}
+                      transaction={trans}
+                      handleDelete={this.handleTransactionDelete}
+                      handleEdit={this.handleTransactionEdit}
+                    />
                   ))}
                 </tbody>
               </table>
