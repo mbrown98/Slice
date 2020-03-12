@@ -17,6 +17,7 @@ class BudgetRow extends React.Component {
     this.addNewTransaction = this.addNewTransaction.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
     this.handleTransactionDelete = this.handleTransactionDelete.bind(this);
+    this.handleTransactionEdit = this.handleTransactionEdit.bind(this);
   }
 
   handleChange(event) {
@@ -32,6 +33,19 @@ class BudgetRow extends React.Component {
   handleEdit() {
     this.setState({ isEditing: !this.state.isEditing });
     this.props.handleUpdate(this.state.budget);
+  }
+
+  handleTransactionEdit(trans) {
+    console.log("made it here");
+    let newBudget = { ...this.state.budget };
+    for (let i = 0; i < newBudget.transactions.length; i++) {
+      if (newBudget.transactions[i]._id === trans._id) {
+        newBudget.transactions[i] = trans;
+      }
+    }
+
+    this.setState({ budget: newBudget });
+    this.props.handleUpdate(newBudget);
   }
 
   allocateMoney(value) {
@@ -159,6 +173,7 @@ class BudgetRow extends React.Component {
                     key={trans._id}
                     transaction={trans}
                     handleDelete={this.handleTransactionDelete}
+                    handleEdit={this.handleTransactionEdit}
                   />
                 ))}
               </tbody>

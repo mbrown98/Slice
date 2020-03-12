@@ -20,6 +20,8 @@ class Transactions extends React.Component {
 
   handleEdit() {
     this.setState({ isEditing: !this.state.isEditing });
+    let transaction = { ...this.state.transaction };
+    this.props.handleEdit(transaction);
   }
 
   handleChange(event) {
