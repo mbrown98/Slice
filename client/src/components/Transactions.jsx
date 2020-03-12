@@ -65,17 +65,22 @@ class Transactions extends React.Component {
             this.state.transaction.category
           )}{" "}
         </td>
-        <div className="buttons">
-          <button className="button is-info is-small" onClick={this.handleEdit}>
-            Edit
-          </button>
-          <button
-            className="button is-danger is-small"
-            onClick={() => console.log("delete button clicked")}
-          >
-            Delete
-          </button>
-        </div>
+        <td>
+          <div className="buttons">
+            <button
+              className="button is-info is-small"
+              onClick={this.handleEdit}
+            >
+              Edit
+            </button>
+            <button
+              className="button is-danger is-small"
+              onClick={() => console.log("delete button clicked")}
+            >
+              Delete
+            </button>
+          </div>
+        </td>
       </tr>
     );
   }
