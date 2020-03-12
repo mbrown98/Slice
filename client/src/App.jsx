@@ -44,6 +44,7 @@ class App extends React.Component {
   }
 
   handleDeleteBudget(budget) {
+    console.log("hello");
     return axios
       .delete(`/api/budget/${budget._id}`)
       .then(data => {
@@ -53,7 +54,6 @@ class App extends React.Component {
   }
 
   handleUpdateBudget(budget) {
-    console.log("id", budget._id);
     return axios
       .put(`/api/budget/${budget._id}`, budget)
       .then(data => {

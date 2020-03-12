@@ -16,6 +16,7 @@ class BudgetRow extends React.Component {
     this.allocateMoney = this.allocateMoney.bind(this);
     this.addNewTransaction = this.addNewTransaction.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.handleTransactionDelete = this.handleTransactionDelete.bind(this);
   }
 
   handleChange(event) {
@@ -41,12 +42,22 @@ class BudgetRow extends React.Component {
   addNewTransaction(obj) {
     let newBudget = { ...this.state.budget };
     newBudget.transactions.push(obj);
-    console.log(newBudget);
+
     this.props.handleUpdate(newBudget);
   }
 
   handleDeleteClick(e) {
     this.props.handleDelete(this.state.budget);
+  }
+
+  handleTransactionDelete(name) {
+    let newBudget = { ...this.state.budget };
+    let transactions = newBudget.transactions.filter(
+      trans => trans.description !== name
+    );
+    newBudget.transactions = transactions;
+    this.props.handleUpdate(newBudget);
+    this.setState({ budget: newBudget });
   }
 
   render() {
@@ -80,7 +91,7 @@ class BudgetRow extends React.Component {
 
             <div>
               <h3>
-                Budget:{" "}
+                Budget:{" $"}
                 {this.state.isEditing ? (
                   <input
                     className="input"
@@ -96,7 +107,7 @@ class BudgetRow extends React.Component {
             </div>
 
             <div>
-              Available:{" "}
+              Available:{" $"}
               {this.state.budget.budget -
                 this.state.budget.transactions.reduce(
                   (a, b) => a + b.amount,
@@ -123,7 +134,6 @@ class BudgetRow extends React.Component {
           </div>
 
           <div>
-            <h4>Transactions</h4>
             <button
               className="button is-primary"
               onClick={() =>
@@ -145,7 +155,11 @@ class BudgetRow extends React.Component {
               </thead>
               <tbody>
                 {this.state.budget.transactions.map(trans => (
-                  <Transactions key={trans._id} transaction={trans} />
+                  <Transactions
+                    key={trans._id}
+                    transaction={trans}
+                    handleDelete={this.handleTransactionDelete}
+                  />
                 ))}
               </tbody>
             </table>
